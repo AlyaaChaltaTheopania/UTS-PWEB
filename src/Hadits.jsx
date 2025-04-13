@@ -90,7 +90,7 @@ export default function Hadits() {
                 <li
                   key={book.id}
                   onClick={() => handleSelectBook(book.id)}
-                  className={`cursor-pointer px-3 py-2 rounded-lg transition ${
+                  className={`cursor-pointer px-3 py-2 rounded-lg transition font-medium ${
                     selectedBook === book.id
                       ? "bg-[#B7B1F2] text-black"
                       : "bg-[#3E5879] text-white hover:bg-[#F5EFE7] hover:text-black"

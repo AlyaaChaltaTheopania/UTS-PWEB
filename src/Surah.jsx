@@ -80,7 +80,11 @@ export default function Surah() {
               <li
                 key={surah.number}
                 onClick={() => setSelectedSurah(surah)}
-                className="text-white cursor-pointer px-3 py-2 rounded-lg bg-[#3E5879] hover:bg-[#F5EFE7] hover:text-black transition-colors duration-300 hover:shadow-lg"
+                className={`cursor-pointer px-3 py-2 rounded-lg transition font-medium ${
+                  selectedSurah?.number === surah.number
+                    ? "bg-[#B7B1F2] text-black"
+                    : "bg-[#3E5879] text-white hover:bg-[#F5EFE7] hover:text-black"
+                }`}
               >
                 {surah.name} ({surah.ayahs.length} Ayat)
               </li>

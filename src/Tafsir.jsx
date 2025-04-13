@@ -23,7 +23,7 @@ export default function Tafsir() {
     fetch(`https://equran.id/api/v2/tafsir/${number}`)
       .then((res) => res.json())
       .then((data) => {
-        setSelectedSurah(data.data.namaLatin);
+        setSelectedSurah({ nomor: number, namaLatin: data.data.namaLatin });
         setTafsir(data.data.tafsir);
       });
   };
@@ -64,7 +64,11 @@ export default function Tafsir() {
               <li
                 key={surah.nomor}
                 onClick={() => handleSelectSurah(surah.nomor)}
-                className="text-white cursor-pointer px-3 py-2 rounded-lg bg-[#3E5879] hover:bg-[#F5EFE7] hover:text-black transition-colors duration-300 hover:shadow-lg"
+                className={`cursor-pointer px-3 py-2 rounded-lg font-medium transition ${
+                  selectedSurah?.nomor === surah.nomor
+                    ? "bg-[#B7B1F2] text-black"
+                    : "bg-[#3E5879] text-white hover:bg-[#F5EFE7] hover:text-black"
+                }`}
               >
                 {surah.nomor}. {surah.namaLatin}
               </li>
@@ -76,7 +80,9 @@ export default function Tafsir() {
         <div className="w-3/4 overflow-y-auto max-h-[80vh] bg-white bg-opacity-80 rounded-xl p-5 shadow">
           {selectedSurah && tafsir ? (
             <div>
-              <h2 className="text-2xl font-bold mb-3">Tafsir {selectedSurah}</h2>
+              <h2 className="text-2xl font-bold mb-3">
+                Tafsir {selectedSurah.namaLatin}
+              </h2>
               <div className="space-y-4">
                 {tafsir.map((ayat, idx) => (
                   <div key={idx} className="p-4 bg-[#F5EFE7] rounded shadow">
@@ -90,8 +96,8 @@ export default function Tafsir() {
             </div>
           ) : (
             <p className="text-gray-600 text-lg text-center">
-                Silakan pilih surah untuk melihat tafsir. 
-              </p>
+              Silakan pilih surah untuk melihat tafsir.
+            </p>
           )}
         </div>
       </div>
